@@ -1,0 +1,72 @@
+import matplotlib.pyplot as plt #import library
+import numpy as np
+
+data = [  #data mahasiswa
+("Budi",81.24,73.66,95.89,2023), 
+("Siti",98.52,84.86,88.7,2024),
+("Asep",91.96,71.03,79.93,2022),
+("Dewi",87.96,97.28,71.91,2024),
+("Andi",74.68,77.76,79.33,2023),
+("Lestari",74.68,89.88,79.76,2022),
+("Joko",71.74,79.35,91.89,2022),
+("Rina",95.99,85.6,89.13,2022),
+("Fajar",88.03,86.4,96.62,2024),
+("Indah",91.24,75.55,84.17,2023),
+("Agus",70.62,99.09,73.59,2022),
+("Fitri",99.1,93.25,91.4,2022),
+("Rudi",94.97,98.18,92.82,2022),
+("Maya",76.37,96.84,86.84,2024),
+("Hadi",75.45,87.94,93.13,2024),
+("Sri",75.5,97.66,84.81,2023),
+("Wawan",79.13,72.65,85.68,2024),
+("Yuni",85.74,75.88,82.83,2022),
+("Bambang",82.96,71.36,70.76,2023),
+("Ayu",78.74,79.76,73.24,2022),
+]
+
+nilai_2022=[] #menyiapkan list per tahun
+nilai_2023=[]
+nilai_2024=[]
+
+# hitung rata rata dan mengelompokan nilai mahasiswa
+for mhs in data:
+    rata=(mhs[1]+mhs[2]+mhs[3])/3
+    
+    if mhs[4]==2022:
+        nilai_2022.append(rata)
+    elif mhs[4]==2023:
+        nilai_2023.append(rata)
+    else:
+        nilai_2024.append(rata)
+
+data_plot=[nilai_2022,nilai_2023,nilai_2024] #menyiapkan data untuk plot
+
+plt.figure(figsize=(8,6)) #membuat boxplot
+
+plt.boxplot(data_plot,labels=["2022","2023","2024"],patch_artist=True)
+
+# menghitung statistik
+for i, d in enumerate(data_plot):
+    
+    minimum=np.min(d)
+    q1=np.percentile(d,25)
+    median=np.median(d)
+    q3=np.percentile(d,75)
+    maksimum=np.max(d)
+
+    x=i+1 #menampilkan teks di grafik
+    
+    plt.text(x,minimum-1,f"Min:{minimum:.1f}",ha='center',fontsize=8)
+    plt.text(x,q1-0.5,f"Q1:{q1:.1f}",ha='center',fontsize=8)
+    plt.text(x,median,f"Med:{median:.1f}",ha='center',fontsize=8)
+    plt.text(x,q3+0.5,f"Q3:{q3:.1f}",ha='center',fontsize=8)
+    plt.text(x,maksimum+1,f"Max:{maksimum:.1f}",ha='center',fontsize=8)
+
+plt.title("Boxplot Nilai Mahasiswa per Angkatan") #judul dan label
+plt.xlabel("Tahun Angkatan")
+plt.ylabel("Nilai Rata-rata")
+
+# mengukur batas Y
+plt.ylim(60,100)
+
+plt.show() #menampilkan grafik
