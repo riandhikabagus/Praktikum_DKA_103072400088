@@ -1,0 +1,120 @@
+import networkx as nx                     
+import matplotlib.pyplot as plt  
+#NO 3A
+
+G = nx.Graph()                            
+
+# menambahkan edge + weight
+G.add_weighted_edges_from([               # Menambahkan beberapa edge sekaligus beserta weight/jarak
+("Arad","Zerind",75),
+("Zerind","Oradea",71),
+("Oradea","Sibiu",151),
+("Arad","Sibiu",140),
+("Arad","Timisoara",118),
+("Timisoara","Lugoj",111),
+("Lugoj","Mehadia",70),
+("Mehadia","Drobeta",75),
+("Drobeta","Craiova",120),
+("Craiova","Pitesti",138),
+("Craiova","Rimnicu Vilcea",146),
+("Sibiu","Rimnicu Vilcea",80),
+("Sibiu","Fagaras",99),
+("Rimnicu Vilcea","Pitesti",97),
+("Fagaras","Bucharest",211),
+("Pitesti","Bucharest",101),
+("Bucharest","Giurgiu",90),
+("Bucharest","Urziceni",85),
+("Urziceni","Hirsova",98),
+("Hirsova","Eforie",86),
+("Urziceni","Vaslui",142),
+("Vaslui","Iasi",92),
+("Iasi","Neamt",87)
+])
+
+
+pos = {                                  # Menentukan posisi koordinat setiap node agar graf terlihat rapi
+"Arad":(-6,0),
+"Zerind":(-5,2),
+"Oradea":(-3,3),
+"Sibiu":(-2,0),
+"Fagaras":(0,0),
+"Rimnicu Vilcea":(-1,-1),
+"Pitesti":(0,-2),
+"Craiova":(-2,-3),
+"Drobeta":(-4,-3),
+"Mehadia":(-5,-2),
+"Lugoj":(-5,-1),
+"Timisoara":(-6,-1),
+"Bucharest":(2,-2),
+"Giurgiu":(2,-4),
+"Urziceni":(4,-2),
+"Hirsova":(6,-2),
+"Eforie":(7,-3),
+"Vaslui":(5,0),
+"Iasi":(4,1),
+"Neamt":(3,2)
+}
+
+labels = nx.get_edge_attributes(G,'weight')   # Mengambil nilai weight pada setiap edge untuk ditampilkan
+
+plt.figure(figsize=(12,7))                    # Mengatur ukuran tampilan graf
+
+nx.draw(G,pos,                                 # Menggambar graf
+        with_labels=True,                     
+        node_size=2000,                        
+        node_color="white",                    
+        edgecolors="black",                    
+        font_size=9)                           
+
+nx.draw_networkx_edge_labels(G,pos,edge_labels=labels)  # Menampilkan label weight pada edge
+
+plt.title("Graf Peta Kota-kota Besar di Eropa")         # Memberi judul graf
+plt.show()                                              # Menampilkan graf
+
+
+
+G = nx.Graph()                            # Membuat graf tidak berarah (undirected graph)
+
+# menambahkan edge + weight sesuai gambar
+G.add_weighted_edges_from([               # Menambahkan beberapa edge beserta jaraknya
+("Jakarta","Cirebon",327),               
+("Jakarta","Bandung",270),               
+("Bandung","Cirebon",120),              
+("Bandung","Yogyakarta",373),            
+("Cirebon","Semarang",305),             
+("Cirebon","Yogyakarta",210),             
+("Semarang","Yogyakarta",109),           
+("Semarang","Surakarta",97),             
+("Yogyakarta","Surakarta",60),           
+("Semarang","Surabaya",369),
+("Yogyakarta","Malang",370),
+("Surabaya","Malang",94)
+])
+
+# posisi node supaya mirip gambar modul
+pos = {
+"Jakarta":(-6,2),
+"Bandung":(-5,0),
+"Cirebon":(-3,2),
+"Semarang":(-1,2),
+"Yogyakarta":(-2,0),
+"Surakarta":(0,0),
+"Surabaya":(2,2),
+"Malang":(2,0)
+}
+
+labels = nx.get_edge_attributes(G,'weight')   # Mengambil nilai weight pada setiap edge
+
+plt.figure(figsize=(10,5))                    # Mengatur ukuran gambar graf
+
+nx.draw(G,pos,                                # Menggambar graf
+        with_labels=True,                     # Menampilkan nama node
+        node_size=2000,                 
+        node_color="white",                  
+        edgecolors="black",                  
+        font_size=10)                       
+
+nx.draw_networkx_edge_labels(G,pos,edge_labels=labels)  # Menampilkan jarak pada edge
+
+plt.title("Graf Kota-kota Besar di Pulau Jawa")         # Judul graf
+plt.show()                                              # Menampilkan graf
